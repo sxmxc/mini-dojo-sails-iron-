@@ -1,0 +1,73 @@
+<template name="dashboardLayout">
+    <nav>
+    {{ #if currentUser }}
+        <ul class="right">
+            
+            <li><a href="#" class="logout waves-effect waves-light btn">Logout</a></li>
+           
+        </ul>
+        <ul id="slide-out" class="side-nav fixed grey">
+            
+            <li>
+                <div class="userView">
+                    <img class="background" src="/images/office.jpg">
+                    <img class="circle" src="{{currentUser.gravatarUrl}}">
+                    <a href="#!name"><span class="white-text name">Hello {{currentUser.name.first}}</span></a>
+                    <a href="#!email"><span class="white-text email">{{#each email in currentUser.emails}}
+                    {{email.address}}
+                    {{/each}}</span></a>
+                </div>
+            </li>
+            <li>
+                <a id="dashboard_button" class="waves-effect waves-light btn">Dashboard Home</a>
+            </li>
+            
+         {{> navDropdown}}
+         </ul>
+ 
+
+        <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+        {{ /if }}
+    </nav>
+    <div id="DashboardContent" class="card-panel  darken-3">
+        <main class="dashboard">
+            {{> yield}}
+            <!-- {{> Template.dynamic template=}} -->
+        </main>
+    </div>
+</template>
+
+<template name="navDropdown">
+<ul>
+      <li>
+                <a id="list_clients" class="waves-effect waves-light btn">Clients</a>
+            </li>
+             <li class="no-padding">
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li>
+                        <a href="#" class="collapsible-header waves-effect waves-light btn">Animals<i class="material-icons">arrow_drop_down</i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="#!">View All</a></li>
+                                <li><a href="#!">Manage</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+             <li class="no-padding">
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li>
+                        <a href="#" class="collapsible-header waves-effect waves-light btn">Schedule<i class="material-icons">arrow_drop_down</i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="#!">View All</a></li>
+                                <li><a href="#!">Manage</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            </ul>
+        
+</template>

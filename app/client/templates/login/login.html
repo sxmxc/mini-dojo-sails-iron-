@@ -1,0 +1,8 @@
+<template name="Login">
+ {{#if atDisabled}}
+  {{> Loading }}
+ {{/if}}
+ <div class="container login-wrapper">
+  {{> atForm}}
+ </div>
+</template>

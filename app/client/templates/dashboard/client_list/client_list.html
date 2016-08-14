@@ -1,0 +1,49 @@
+<template name="DashboardClientList">
+    <div class="client-list card-panel container">
+        {{> searchBox}}
+    </div>
+</template>
+
+<template name="searchBox">
+    <div class="row">
+        <div class="col l9 searchBox">
+            <i class="material-icons">search</i>{{> EasySearch.Input index=clientsIndex attributes=searchAttributes }}
+            <div class="autosuggest-component">
+            </div>
+        </div>
+        <div class="col l3">
+            <a id="new_client" class="btn waves-effect waves-light">New CLient</a>
+        </div>
+    </div>
+    <div class="row">
+        {{#EasySearch.IfSearching index=clientsIndex}}
+        <div>{{> Loading}}</div>
+        {{/EasySearch.IfSearching}} {{#EasySearch.IfNoResults index=clientsIndex}}
+        <div>{{> Loading}}</div>
+        {{/EasySearch.IfNoResults}} {{> EasySearch.Pagination index=clientsIndex maxPages=10}} {{ #EasySearch.Each index=clientsIndex }}
+        {{> clientCard}}
+        {{ /EasySearch.Each }} {{> EasySearch.Pagination index=clientsIndex maxPages=10}}
+    </div>
+</template>
+
+<template name="clientCard">
+   <div class="col s12 m6">
+            <div class="card hoverable blue-grey darken-1 edit">
+                <div class="card-content white-text">
+                    {{#if editMode }} {{> quickForm collection="Clients" doc=this id=updateClientId type="update"}} {{else}}
+                    <span class="card-title">{{name}}</span>
+                    <h5 class="title">Address</h5>
+                    <p>{{#each addr in address}}
+                    {{addr.street}} <br /> {{addr.city}}, {{addr.state}}. {{addr.zip}}
+                    {{/each}}</p>
+                    <h5 class="mdi-hardware-phone-android">Phone Number</h5>
+                    <p>+91 9912776151</p>
+                    {{/if}}
+                </div>
+                <div class="card-action">
+                    <a class="btn-floating waves-effect waves-light edit-icon"><i class="material-icons">mode_edit</i></a>
+                    <a class="btn-floating waves-effect waves-light trash-icon"><i class="material-icons">delete</i></a>
+                </div>
+            </div>
+        </div>
+</template>
