@@ -46,6 +46,28 @@ Schemas.Clients = new SimpleSchema({
     },
     "address.$.zip": {
       type: String
+    },
+    pets: {
+    	type: [Object],
+    	minCount: 1
+    },
+    "pets.$.type": {
+    	type: String
+    },
+    "pets.$.name": {
+    	type: String
+    },
+    "pets.$.breed": {
+    	type: String
+    },
+    comments: {
+    	type:[Object]
+    },
+    "comments.$.date": {
+    	type: Date
+    },
+    "comments.$.content": {
+    	type: String
     }
 });
 

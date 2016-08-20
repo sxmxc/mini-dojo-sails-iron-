@@ -19,6 +19,19 @@ Meteor.startup(function () {
             state: faker.address.stateAbbr(),
             zip: faker.address.zipCode()
           }],
+          pets: [{
+            type: faker.lorem.words(1).toString(),
+            name: faker.name.findName(),
+            breed: faker.lorem.words(1).toString()
+          },{
+            type: faker.lorem.words(1).toString(),
+            name: faker.name.findName(),
+            breed: faker.lorem.words(1).toString()
+          }],
+          comments: [{
+            date: faker.date.past(),
+            content: faker.lorem.paragraph()
+          }]
         });
       });
     }

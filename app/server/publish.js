@@ -9,7 +9,7 @@ Meteor.publish("userData", function() {
 });
 Meteor.publish("clients.all", function() {
     if (this.userId) {
-        return Clients.find({}, { fields: {'name': 1, 'address': 1}})
+        return Clients.find({}, { fields: {'name': 1, 'address': 1, 'pets': 1, 'comments': 1}})
     } else {
         this.ready();
     }

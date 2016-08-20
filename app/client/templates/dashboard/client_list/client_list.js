@@ -4,6 +4,9 @@
 Template.clientCard.onCreated(function() {
 
   this.editMode = new ReactiveVar(false);
+   $('.collapsible').collapsible({
+      accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
 });
 
 Template.clientCard.events({
@@ -36,8 +39,8 @@ Template.DashboardClientList.helpers({
         return Clients.find({}).fetch();
     },
    
-    
 
+    
 });
 
 /*****************************************************************************/
@@ -51,10 +54,13 @@ Template.DashboardClientList.onCreated(function() {
     });
 
 
+
     
 });
 
-Template.DashboardClientList.onRendered(function() {});
+Template.DashboardClientList.onRendered(function() {
+   
+});
 
 Template.DashboardClientList.onDestroyed(function() {});
 

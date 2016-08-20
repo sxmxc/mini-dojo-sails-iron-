@@ -6,4 +6,4 @@
 # export MONGO_URL="mongodb://localhost:27017/myapp-development"
 # export ROOT_URL="http://localhost:3000"
 
-export SAMPLE_VARIABLE="somevalue"
+export MONGO_URL="mongodb://public:sm10311959@ds013206.mlab.com:13206/xandboxmeteor1"

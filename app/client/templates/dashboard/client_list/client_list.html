@@ -3,7 +3,6 @@
         {{> searchBox}}
     </div>
 </template>
-
 <template name="searchBox">
     <div class="row">
         <div class="col l9 searchBox">
@@ -20,16 +19,50 @@
         <div>{{> Loading}}</div>
         {{/EasySearch.IfSearching}} {{#EasySearch.IfNoResults index=clientsIndex}}
         <div>{{> Loading}}</div>
-        {{/EasySearch.IfNoResults}} {{> EasySearch.Pagination index=clientsIndex maxPages=10}} {{ #EasySearch.Each index=clientsIndex }}
-        {{> clientCard}}
-        {{ /EasySearch.Each }} {{> EasySearch.Pagination index=clientsIndex maxPages=10}}
+        {{/EasySearch.IfNoResults}} {{> EasySearch.Pagination index=clientsIndex maxPages=10}} {{ #EasySearch.Each index=clientsIndex }} {{> clientCard}} {{ /EasySearch.Each }} {{> EasySearch.Pagination index=clientsIndex maxPages=10}}
     </div>
 </template>
-
 <template name="clientCard">
-   <div class="col s12 m6">
-            <div class="card hoverable blue-grey darken-1 edit">
-                <div class="card-content white-text">
+    <ul class="collapsible card" data-collapsible="accordion">
+        <li>
+            <div class="collapsible-header blue-grey darken-1 hoverable white-text"><i class="material-icons">perm_identity</i>{{name}}</div>
+            <div class="collapsible-body row">
+                <div class="col m6">
+                    <h5 class="title">Address</h5>
+                    {{#each addr in address}} {{addr.street}}
+                        <br /> {{addr.city}}, {{addr.state}}. {{addr.zip}} {{/each}}
+                </div>
+                <div clas="col m6">
+                    <h5 class="mdi-hardware-phone-android">Phone Number</h5>
+                    +91 9912776151
+                </div>
+                <div class="col m12">
+                    <h5 class="title">Pets</h5>
+                    {{#each pet in pets}} Name: {{pet.name}}
+                        <br /> Type: {{pet.type}} Breed: {{pet.breed}}
+                        <br /> {{/each}}
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="collapsible-header blue-grey darken-1 hoverable white-text"><i class="material-icons">message</i>Comments</div>
+            <div class="collapsible-body">
+                <h5 class="title">Comments</h5> {{#each comment in comments}}
+                <p>{{comment.content}}</p>
+                {{/each}}
+            </div>
+        </li>
+        <li>
+            <div class="collapsible-header blue-grey darken-1 hoverable white-text"><i class="material-icons">input</i>Edit</div>
+            <div class="collapsible-body">
+                <a class="btn-floating waves-effect waves-light edit-icon"><i class="material-icons">mode_edit</i></a>
+                <a class="btn-floating waves-effect waves-light trash-icon"><i class="material-icons">delete</i></a>
+            </div>
+        </li>
+    </ul>
+    <!-- <div class="row">
+            <ul class="card hoverable blue-grey darken-1 edit col s12 m12 l12">
+                <li class="card-content white-text col s12 m6">
                     {{#if editMode }} {{> quickForm collection="Clients" doc=this id=updateClientId type="update"}} {{else}}
                     <span class="card-title">{{name}}</span>
                     <h5 class="title">Address</h5>
@@ -39,11 +72,23 @@
                     <h5 class="mdi-hardware-phone-android">Phone Number</h5>
                     <p>+91 9912776151</p>
                     {{/if}}
-                </div>
-                <div class="card-action">
+                </li>
+                <li class="card-content white-text col s12 m6">
+                <h5 class="card-title">Pets</h5>
+                  <p>{{#each pet in pets}}
+                    Name: {{pet.name}} <br /> Type: {{pet.type}} Breed: {{pet.breed}} <br />
+                    {{/each}}</p>
+                </li>
+                <li class="card-action col s12 m12 l12">
+                    <h5 class="title">Comments</h5>
+                    {{#each comment in comments}}
+                    <p>{{comment.content}}</p>
+                    {{/each}}
+                </li>
+                <li class="card-action col s12 m12 l12">
                     <a class="btn-floating waves-effect waves-light edit-icon"><i class="material-icons">mode_edit</i></a>
                     <a class="btn-floating waves-effect waves-light trash-icon"><i class="material-icons">delete</i></a>
-                </div>
-            </div>
-        </div>
+                </li>
+            </ul>
+        </div> -->
 </template>

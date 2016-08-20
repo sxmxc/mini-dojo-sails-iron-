@@ -4,7 +4,7 @@ AccountsTemplates.configure({
     // Behavior
     confirmPassword: true,
     enablePasswordChange: true,
-    forbidClientAccountCreation: true,
+    forbidClientAccountCreation: false,
     overrideLoginErrors: true,
     sendVerificationEmail: false,
     lowercaseUsername: false,
@@ -16,7 +16,6 @@ AccountsTemplates.configure({
     showLabels: true,
     showPlaceholders: true,
     showResendVerificationEmailLink: false,
-    forbidClientAccountCreation : true,
 
     // Client-side Validation
     continuousValidation: false,
