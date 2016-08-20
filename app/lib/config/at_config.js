@@ -16,6 +16,7 @@ AccountsTemplates.configure({
     showLabels: true,
     showPlaceholders: true,
     showResendVerificationEmailLink: false,
+    forbidClientAccountCreation : true,
 
     // Client-side Validation
     continuousValidation: false,
