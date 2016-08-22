@@ -1,5 +1,6 @@
 <template name="dashboardLayout">
-    <nav>
+    <div class="navbar-fixed">
+    <nav class="">
     {{ #if currentUser }}
         <ul class="right">
             
@@ -29,10 +30,10 @@
         <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
         {{ /if }}
     </nav>
-    <div id="DashboardContent" class="card-panel  darken-3">
+    </div>
+    <div id="DashboardContent" class="grey lighten-3">
         <main class="dashboard">
             {{> yield}}
-            <!-- {{> Template.dynamic template=}} -->
         </main>
     </div>
 </template>

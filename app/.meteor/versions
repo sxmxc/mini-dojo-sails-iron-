@@ -98,6 +98,8 @@ peerlibrary:blaze-components@0.16.2
 peerlibrary:computed-field@0.3.1
 peerlibrary:data-lookup@0.1.0
 peerlibrary:reactive-field@0.1.0
+percolate:momentum@0.7.2
+percolate:velocityjs@1.1.0
 practicalmeteor:faker@3.0.1_1
 promise@0.8.4
 raix:handlebar-helpers@0.2.5

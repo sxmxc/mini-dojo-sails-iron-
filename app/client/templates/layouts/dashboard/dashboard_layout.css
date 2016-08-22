@@ -27,6 +27,7 @@
 
 main.dashboard {
     margin-left: 250px;
+    margin-top: 25px;
 }
 
 @media only screen and (max-width: 992px) {
@@ -35,4 +36,8 @@ main.dashboard {
     footer.dashboard {
         margin-left: 0;
     }
+}
+
+body {
+    background-color: #eeeeee;
 }

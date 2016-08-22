@@ -4,7 +4,9 @@
 Template.clientCard.onCreated(function() {
 
   this.editMode = new ReactiveVar(false);
-   $('.collapsible').collapsible({
+});
+Template.clientCard.onRendered(function() {
+    $('.collapsible').collapsible({
       accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
     });
 });
@@ -64,13 +66,22 @@ Template.DashboardClientList.onRendered(function() {
 
 Template.DashboardClientList.onDestroyed(function() {});
 
-Template.searchBox.helpers({
+Template.ClientMain.helpers({
     clientsIndex: () => ClientIndex,
     searchAttributes: () => {
         return {
-            placeholder: 'Find ...',
+            id: "search",
         };
     },
     
     
+});
+Template.clientPagination.events({
+    'click #nextPage': function() {
+EasySearch.pagination('clientsIndex', EasySearch.PAGINATION_NEXT);
+},
+    'click #prevPage': function() {
+EasySearch.pagination('clientsIndex', EasySearch.PAGINATION_PREV);
+}
+
 });

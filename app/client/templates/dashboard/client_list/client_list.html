@@ -1,65 +1,113 @@
 <template name="DashboardClientList">
-    <div class="client-list card-panel container">
-        {{> searchBox}}
-    </div>
+    {{#if Template.subscriptionsReady}} {{> Template.dynamic template="ClientMain"}} {{else}} {{> Loading}} {{/if}} 
 </template>
-<template name="searchBox">
-    <div class="row">
-        <div class="col l9 searchBox">
-            <i class="material-icons">search</i>{{> EasySearch.Input index=clientsIndex attributes=searchAttributes }}
-            <div class="autosuggest-component">
+<template name="ClientMain">
+    <div class="client-list card-panel container">
+        <div class="row ">
+        <div class="col l9">
+            {{> EasySearch.Input index=clientsIndex attributes=searchAttributes }}
             </div>
+            <div class="col l3">
+                    <a id="new_client" class="btn waves-effect waves-light">New CLient</a>
+                </div>
         </div>
-        <div class="col l3">
-            <a id="new_client" class="btn waves-effect waves-light">New CLient</a>
+        <div class="row">
+       
+            {{#EasySearch.IfSearching index=clientsIndex}}
+            <div>{{> Loading}}</div>
+            {{/EasySearch.IfSearching}} {{#EasySearch.IfNoResults index=clientsIndex}}
+            <div>No Clients Found...</div>
+            {{/EasySearch.IfNoResults}} {{> EasySearch.Pagination index=clientsIndex maxPages=10 prevAndNext=false customRenderPagination="clientPagination"}}
+             {{ #EasySearch.Each index=clientsIndex }} {{#momentum plugin="fade"}} {{> clientCard}} {{/momentum}} {{ /EasySearch.Each }}
+
         </div>
-    </div>
-    <div class="row">
-        {{#EasySearch.IfSearching index=clientsIndex}}
-        <div>{{> Loading}}</div>
-        {{/EasySearch.IfSearching}} {{#EasySearch.IfNoResults index=clientsIndex}}
-        <div>{{> Loading}}</div>
-        {{/EasySearch.IfNoResults}} {{> EasySearch.Pagination index=clientsIndex maxPages=10}} {{ #EasySearch.Each index=clientsIndex }} {{> clientCard}} {{ /EasySearch.Each }} {{> EasySearch.Pagination index=clientsIndex maxPages=10}}
     </div>
 </template>
 <template name="clientCard">
-    <ul class="collapsible card" data-collapsible="accordion">
-        <li>
-            <div class="collapsible-header blue-grey darken-1 hoverable white-text"><i class="material-icons">perm_identity</i>{{name}}</div>
-            <div class="collapsible-body row">
-                <div class="col m6">
-                    <h5 class="title">Address</h5>
-                    {{#each addr in address}} {{addr.street}}
-                        <br /> {{addr.city}}, {{addr.state}}. {{addr.zip}} {{/each}}
+    <div class="col s12 m4 l6 offset-m4 offset-l3">
+        <ul class="collapsible blue-grey darken-2" data-collapsible="accordion">
+            <li>
+                <div class="collapsible-header blue-grey darken-1 hoverable white-text">
+                    <a href="#"><i class="material-icons left">perm_identity</i>{{name}}</a></div>
+                <div class="collapsible-body">
+                    <div class="card">
+                        <div class="card-content">
+                            <h5 class="card-title">Address</h5>
+                            <table class="responsive-table card centered striped">
+                                <thead>
+                                    <tr>
+                                        <th data-field="street">Street</th>
+                                        <th data-field="city">City</th>
+                                        <th data-field="stete">State</th>
+                                        <th data-field="zip">Zip</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each addr in address}}
+                                    <tr>
+                                        <td>{{addr.street}}</td>
+                                        <td>{{addr.city}}</td>
+                                        <td>{{addr.state}}</td>
+                                        <td>{{addr.zip}}</td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <h5 class="mdi-hardware-phone-android card-title">Phone Number</h5> +91 9912776151
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <h5 class="card-title">Pets</h5>
+                            <table class="responsive-table card centered striped">
+                                <thead>
+                                    <tr>
+                                        <th data-field="name">Name</th>
+                                        <th data-field="type">Type</th>
+                                        <th data-field="breed">Breed</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each pet in pets}}
+                                    <tr>
+                                        <td>{{pet.name}}</td>
+                                        <td>{{pet.type}}</td>
+                                        <td>{{pet.breed}}</td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div clas="col m6">
-                    <h5 class="mdi-hardware-phone-android">Phone Number</h5>
-                    +91 9912776151
+            </li>
+            <li>
+                <div class="collapsible-header blue-grey darken-1 hoverable white-text"><i class="material-icons">message</i>Comments</div>
+                <div class="collapsible-body">
+                    <div class="card-panel centered">
+                        <h5 class="card-title">Comments</h5> {{#each comment in comments}}
+                        <div class="card">{{comment.content}}</div>
+                        {{/each}}
+                    </div>
                 </div>
-                <div class="col m12">
-                    <h5 class="title">Pets</h5>
-                    {{#each pet in pets}} Name: {{pet.name}}
-                        <br /> Type: {{pet.type}} Breed: {{pet.breed}}
-                        <br /> {{/each}}
+            </li>
+            <li>
+                <div class="collapsible-header blue-grey darken-1 hoverable white-text">
+                    <i class="material-icons">input</i>Edit</div>
+                <div class="collapsible-body">
+                    <div class="card-panel center-align">
+                        <a class="btn-floating waves-effect waves-light edit-icon"><i class="material-icons">mode_edit</i></a>
+                        <a class="btn-floating waves-effect waves-light trash-icon"><i class="material-icons">delete</i></a>
+                        <a class="btn-floating waves-effect waves-light trash-icon"><i class="material-icons">delete</i></a>
+                    </div>
                 </div>
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header blue-grey darken-1 hoverable white-text"><i class="material-icons">message</i>Comments</div>
-            <div class="collapsible-body">
-                <h5 class="title">Comments</h5> {{#each comment in comments}}
-                <p>{{comment.content}}</p>
-                {{/each}}
-            </div>
-        </li>
-        <li>
-            <div class="collapsible-header blue-grey darken-1 hoverable white-text"><i class="material-icons">input</i>Edit</div>
-            <div class="collapsible-body">
-                <a class="btn-floating waves-effect waves-light edit-icon"><i class="material-icons">mode_edit</i></a>
-                <a class="btn-floating waves-effect waves-light trash-icon"><i class="material-icons">delete</i></a>
-            </div>
-        </li>
-    </ul>
+            </li>
+        </ul>
+    </div>
     <!-- <div class="row">
             <ul class="card hoverable blue-grey darken-1 edit col s12 m12 l12">
                 <li class="card-content white-text col s12 m6">
@@ -91,4 +139,16 @@
                 </li>
             </ul>
         </div> -->
+</template>
+
+<template name="clientPagination">
+
+<ul class="pagination">
+    <li class="waves-effect" id="prevPage"><i class="material-icons">chevron_left</i></li>
+    {{#each page}} 
+      <li class="waves-effect page {{pageClasses this}}"> {{content}} </li>
+     {{/each}}
+    <li class="waves-effect" id="nextPage"><i class="material-icons">chevron_right</i></li>
+  </ul>
+    
 </template>
